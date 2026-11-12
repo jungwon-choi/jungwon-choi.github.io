@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-748SVPNPM3"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-748SVPNPM3');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jungwon Choi">
+  <meta name="description" content="Jungwon Choi, PhD student at KAIST AI, researches multimodal LLMs for real-world challenges: efficient full-duplex interaction, missing modalities, and healthcare AI.">
+  <title>Jungwon Choi</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230076df'/><text x='32' y='41' font-family='system-ui,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'>JC</text></svg>">
+
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Academicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <style>
+    /* ===========================================================
+       CSS CUSTOM PROPERTIES
+       =========================================================== */
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-alt: #fafbfc;
+      --color-bg-code: #f1f3f5;
+      --color-text: #212529;
+      --color-text-secondary: #6c757d;
+      --color-text-light: #adb5bd;
+      --color-accent: #0076df;
+      --color-accent-hover: #005bb5;
+      --color-highlight: #b71c1c;
+      --color-divider: rgba(0, 0, 0, 0.08);
+      --color-badge-bg: #0076df;
+      --color-badge-text: #ffffff;
+      --color-nav-bg: rgba(255, 255, 255, 0.92);
+      --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --max-width: 1000px;
+      --nav-height: 54px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #1a1a2e;
+      --color-bg-alt: #16213e;
+      --color-bg-code: #2a2a3e;
+      --color-text: #e0e0e0;
+      --color-text-secondary: #a0a0b0;
+      --color-text-light: #707080;
+      --color-accent: #4da3ff;
+      --color-accent-hover: #7dbdff;
+      --color-highlight: #ff6b6b;
+      --color-divider: rgba(255, 255, 255, 0.1);
+      --color-badge-bg: #4da3ff;
+      --color-badge-text: #ffffff;
+      --color-nav-bg: rgba(26, 26, 46, 0.95);
+    }
+
+    /* ===========================================================
+       RESET & BASE
+       =========================================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      padding-top: var(--nav-height);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: var(--color-accent-hover);
+      text-decoration: underline;
+    }
+
+    ::selection {
+      background: rgba(0, 118, 223, 0.15);
+    }
+
+    /* ===========================================================
+       NAVIGATION
+       =========================================================== */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      border-bottom: 1px solid var(--color-divider);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+    }
+
+    .site-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .nav-links {
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      display: flex;
+      gap: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      flex: 0 0 auto;
+    }
+
+    section[id] {
+      scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+    }
+
+    .theme-toggle {
+      flex-shrink: 0;
+      border: none;
+      background: transparent;
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.4rem;
+      border-radius: 6px;
+      margin-left: 0.5rem;
+      transition: color 0.2s, background 0.2s;
+    }
+    .theme-toggle:hover {
+      color: var(--color-accent);
+      background: rgba(128, 128, 128, 0.1);
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .nav-links a.active {
+      font-weight: 500;
+      color: var(--color-accent);
+    }
+
+    /* ===========================================================
+       PROGRESS BAR (al-folio style)
+       =========================================================== */
+    .progress-bar-top {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      width: 0%;
+      height: 1.5px;
+      background: var(--color-accent);
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===========================================================
+       MAIN CONTAINER
+       =========================================================== */
+    .main-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 3rem;
+    }
+
+    /* ===========================================================
+       HEADER / PROFILE SECTION
+       =========================================================== */
+    .profile-header {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .profile-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-photo-wrapper {
+      flex-shrink: 0;
+      width: 200px;
+      order: 2;
+      text-align: center;
+    }
+
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--color-divider);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+      transition: box-shadow 0.2s;
+    }
+
+    .profile-name {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.2em 0.55em;
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.55rem;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-name strong {
+      font-weight: 700;
+    }
+
+    .profile-name-en {
+      white-space: nowrap;
+    }
+
+    .profile-korean {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      color: var(--color-text-secondary);
+      text-shadow: 2px 3px 0 rgba(0, 118, 223, 0.12);
+    }
+
+    [data-theme="dark"] .profile-korean {
+      text-shadow: 2px 3px 0 rgba(77, 163, 255, 0.2);
+    }
+
+    .profile-tagline {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+
+    .research-tags {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.35rem;
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 0.25rem 0 0.4rem;
+      margin-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-text-light) transparent;
+    }
+
+    .research-tags:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .research-tag {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: var(--color-bg-code);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-divider);
+      font-weight: 500;
+    }
+
+    .profile-open {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #245b85;
+      margin-top: 0.5rem;
+    }
+
+    [data-theme="dark"] .profile-open {
+      color: #91b9da;
+    }
+
+    .profile-bio {
+      color: var(--color-text);
+      line-height: 1.75;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-bio a {
+      border-bottom: 1px dashed var(--color-accent);
+    }
+    .profile-bio a:hover {
+      border-bottom-style: solid;
+      text-decoration: none;
+    }
+
+    /* ===========================================================
+       SOCIAL ICONS ROW
+       =========================================================== */
+    .social-icons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.15rem 0.4rem;
+      margin-top: 0.8rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 40px;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .social-icons i {
+      width: 1rem;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .social-icons a:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .social-icons a:hover {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* ===========================================================
+       SECTION HEADINGS
+       =========================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .section-title a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .section-subtitle {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+    }
+
+    /* ===========================================================
+       NEWS SECTION
+       =========================================================== */
+    .news-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+
+    .news-archive {
+      margin-top: 0.65rem;
+    }
+
+    .news-archive summary {
+      width: fit-content;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+    }
+
+    .news-archive summary:hover {
+      color: var(--color-accent);
+    }
+
+    .news-archive summary:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .news-table tr {
+      border: none;
+    }
+
+    .news-table th {
+      width: 6.5rem;
+      padding: 0.45rem 0.75rem 0.45rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      vertical-align: top;
+      white-space: nowrap;
+      border: none;
+    }
+
+    .news-table td {
+      padding: 0.45rem 0 0.45rem 0.5rem;
+      font-size: 1rem;
+      color: var(--color-text);
+      border: none;
+      line-height: 1.6;
+    }
+
+    .news-venue {
+      font-weight: 500;
+    }
+
+    .news-highlight {
+      color: var(--color-highlight);
+      font-weight: 500;
+    }
+
+    /* ===========================================================
+       PUBLICATIONS SECTION
+       =========================================================== */
+    .publications-section {
+      margin-top: 3rem;
+    }
+
+    .pub-year-heading {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      border-top: 1px solid var(--color-divider);
+      padding-top: 0.9rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      text-align: right;
+    }
+
+    .pub-year-heading:first-of-type {
+      margin-top: 0.5rem;
+    }
+
+    .pub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 200px minmax(0, 1fr);
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--color-divider);
+      align-items: start;
+    }
+
+    .pub-item:last-child {
+      border-bottom: none;
+    }
+
+    .pub-thumb-col {
+      width: 100%;
+    }
+
+    .pub-thumb {
+      display: block;
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--color-divider);
+      padding: 0.35rem;
+    }
+
+    .pub-info {
+      min-width: 0;
+    }
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.65rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .pub-venue {
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+    }
+
+    .pub-oral {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #fff1dc;
+      color: #934b00;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    [data-theme="dark"] .pub-oral {
+      background: #49301b;
+      color: #ffc478;
+    }
+
+    .pub-title {
+      font-weight: 500;
+      font-size: 1.125rem;
+      line-height: 1.45;
+      margin-bottom: 0.45rem;
+      color: var(--color-text);
+    }
+
+    .pub-summary {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-authors {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.65rem;
+    }
+
+    .pub-authors .me {
+      color: var(--color-text);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--color-text-light);
+      text-underline-offset: 2px;
+    }
+
+    .pub-authors .equal {
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--color-text-light);
+      text-underline-offset: 2px;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .pub-links a {
+      display: inline-block;
+      font-size: 0.85rem;
+      padding: 0.18rem 0.65rem;
+      border: 1px solid var(--color-text-secondary);
+      border-radius: 3px;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+    }
+
+    .pub-links a:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* ===========================================================
+       EDUCATION SECTION (compact icon-based, from Style E)
+       =========================================================== */
+    .education-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+    .education-list li {
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--color-divider);
+      font-size: 1rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .education-list li:last-child {
+      border-bottom: none;
+    }
+    .edu-icon {
+      color: var(--color-text-light);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      width: 18px;
+      text-align: center;
+    }
+    .edu-content {
+      flex: 1;
+    }
+    .edu-school {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .edu-detail {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+    }
+    .edu-date {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* ===========================================================
+       HONORS & SERVICES (compact list, shared style)
+       =========================================================== */
+    .honor-list, .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+    .honor-list li {
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--color-divider);
+      font-size: 0.95rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .honor-list li:last-child {
+      border-bottom: none;
+    }
+    .honor-icon {
+      color: var(--color-text-light);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      width: 18px;
+      text-align: center;
+    }
+    .honor-content {
+      flex: 1;
+    }
+    .honor-title {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .honor-detail {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+    }
+    .honor-date {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    #honors .section-title,
+    #services .section-title,
+    #education .section-title {
+      margin-top: 2rem;
+      margin-bottom: 0.65rem;
+    }
+
+    #services {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      column-gap: 3rem;
+    }
+    #services > .section-title {
+      grid-column: 1 / -1;
+    }
+    .service-group {
+      min-width: 0;
+    }
+    .service-group-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+    .service-list li {
+      padding: 0.25rem 0;
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .conference-list li {
+      display: grid;
+      grid-template-columns: 5rem auto;
+      justify-content: start;
+    }
+    .conference-list-mobile {
+      display: none;
+    }
+    .service-years {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* ===========================================================
+       FOOTER
+       =========================================================== */
+    .site-footer {
+      border-top: 1px solid var(--color-divider);
+      padding: 2.5rem 1.5rem;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .site-footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.2rem;
+    }
+
+    .site-footer a {
+      color: var(--color-text-secondary);
+    }
+    .site-footer a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===========================================================
+       RESPONSIVE
+       =========================================================== */
+    @media (max-width: 768px) {
+      #services {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .service-group + .service-group {
+        margin-top: 1rem;
+      }
+
+      .conference-list {
+        display: none;
+      }
+
+      .conference-list-mobile {
+        display: block;
+      }
+
+      .conference-list-mobile li {
+        display: grid;
+        grid-template-columns: 8.5rem auto;
+        justify-content: start;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+
+      .profile-photo-wrapper {
+        order: -1;
+        width: min(100%, 360px);
+      }
+
+      .profile-text {
+        width: 100%;
+      }
+
+      .profile-photo {
+        width: 160px;
+        height: 160px;
+      }
+
+      .social-icons {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.2rem;
+      }
+
+      .social-icons a {
+        gap: 0.25rem;
+        min-height: 44px;
+        font-size: 0.75rem;
+      }
+
+      .social-icons i {
+        width: 0.9rem;
+        font-size: 0.9rem;
+      }
+
+      .site-nav .container {
+        padding: 0 1rem;
+      }
+
+      .profile-name {
+        font-size: 1.8rem;
+        justify-content: center;
+      }
+
+      .pub-item {
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .pub-thumb {
+        height: 120px;
+      }
+
+      .nav-links a {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 2rem 1rem 3rem;
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+      }
+
+      .pub-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .pub-thumb {
+        height: 180px;
+      }
+
+      .education-list li, .honor-list li {
+        display: grid;
+        grid-template-columns: 18px minmax(0, 1fr);
+        gap: 0.2rem 0.6rem;
+      }
+
+      .edu-date, .honor-date {
+        grid-column: 2;
+      }
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       ============================================================ -->
+  <nav class="site-nav">
+    <div class="container">
+      <ul class="nav-links">
+        <li><a href="#about" class="active">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#honors">Honors</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Progress bar -->
+  <div class="progress-bar-top" id="progressBar"></div>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <div class="main-content">
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         ABOUT / PROFILE
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="about">
+      <div class="profile-header">
+        <div class="profile-text">
+          <h1 class="profile-name">
+            <span class="profile-name-en"><strong>Jungwon</strong> Choi</span>
+            <span class="profile-korean" lang="ko">최중원</span>
+          </h1>
+          <div class="profile-tagline">Multimodal intelligence for the real world</div>
+
+          <p class="profile-bio">
+            I am a Ph.D. student at <a href="https://gsai.kaist.ac.kr/" target="_blank" rel="noopener">KAIST AI</a>, working in the
+            <a href="https://siml.kaist.ac.kr/" target="_blank" rel="noopener">Statistical Inference and Machine Learning Lab (SIML)</a>
+            under the supervision of <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Prof. Juho Lee</a>.
+          </p>
+          <p class="profile-bio">
+            My current research focuses on multimodal large language models,
+            addressing real-world challenges such as efficient full-duplex interaction and learning with missing modalities.
+            I also work on generative modeling and healthcare AI, with applications spanning brain imaging, computational pathology, and disease surveillance.
+          </p>
+
+          <div class="research-tags" role="region" aria-label="Research interests" tabindex="0">
+            <span class="research-tag">Multimodal LLMs</span>
+            <span class="research-tag">Full-duplex</span>
+            <span class="research-tag">Missing Modalities</span>
+            <span class="research-tag">Self-supervised</span>
+            <span class="research-tag">Healthcare AI</span>
+          </div>
+
+          <p class="profile-open">
+            Open to research internships and collaborations.
+          </p>
+
+        </div>
+
+        <div class="profile-photo-wrapper">
+          <img class="profile-photo" src="./assets/profile_jwc.jpg" alt="Jungwon Choi" loading="eager">
+          <!-- Contact links -->
+          <div class="social-icons">
+            <a href="mailto:jungwon.choi@kaist.ac.kr" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Email</span></a>
+            <a href="https://scholar.google.com/citations?hl=ko&amp;user=xFlasdQAAAAJ" title="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar" aria-hidden="true"></i><span>Scholar</span></a>
+            <a href="https://github.com/jungwon-choi" title="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i><span>GitHub</span></a>
+            <a href="https://www.linkedin.com/in/jungwon-choi-48b35212b" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         NEWS
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="news">
+      <h2 class="section-title">
+        <a href="#news">News</a>
+      </h2>
+
+      <table class="news-table" aria-label="Recent news">
+        <tbody>
+            <tr>
+              <th scope="row">Sep 2026</th>
+              <td>One paper accepted to <span class="news-venue">NeurIPS 2026</span>!</td>
+            </tr>
+            <tr>
+              <th scope="row">Jul 2026</th>
+              <td>One paper accepted to <span class="news-venue">ICML 2026 SD4H Workshop</span>!</td>
+            </tr>
+            <tr>
+              <th scope="row">Mar 2026</th>
+              <td>Two papers accepted to <span class="news-venue">ICLR 2026 Workshops</span> (Re-Align; Trustworthy AI)!</td>
+            </tr>
+            <tr>
+              <th scope="row">Jan 2026</th>
+              <td>Two papers accepted to <span class="news-venue">ICLR 2026</span>!</td>
+            </tr>
+            <tr>
+              <th scope="row">Dec 2025</th>
+              <td>One paper accepted to <span class="news-venue">WACV 2026 LFMBio Workshop</span> (<span class="news-highlight">Oral</span>)!</td>
+            </tr>
+        </tbody>
+      </table>
+      <details class="news-archive">
+        <summary>Earlier news</summary>
+        <table class="news-table" aria-label="Earlier news">
+          <tbody>
+            <tr>
+              <th scope="row">Dec 2024</th>
+              <td>Excellence Award &ndash; First Place, <span class="news-venue">Seoul AI Hub</span> (AI+Healthcare)!</td>
+            </tr>
+            <tr>
+              <th scope="row">Sep 2024</th>
+              <td>One paper accepted to <span class="news-venue">NeurIPS 2024</span>!</td>
+            </tr>
+            <tr>
+              <th scope="row">Feb 2024</th>
+              <td>One paper accepted to <span class="news-venue">ISBI 2024</span> (<span class="news-highlight">Oral</span>)!</td>
+            </tr>
+            <tr>
+              <th scope="row">Oct 2023</th>
+              <td>Two papers accepted to <span class="news-venue">NeurIPS 2023 TGL Workshop</span>!</td>
+            </tr>
+            <tr>
+              <th scope="row">Dec 2022</th>
+              <td>One paper accepted to <span class="news-venue">AAAI 2023 Bridge Program</span> (<span class="news-highlight">Oral</span>)!</td>
+            </tr>
+            <tr>
+              <th scope="row">Sep 2022</th>
+              <td>One paper accepted to <span class="news-venue">NeurIPS 2022</span>!</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         PUBLICATIONS
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="publications" class="publications-section">
+      <h2 class="section-title">
+        Publications
+      </h2>
+      <p class="section-subtitle">* Equal contribution</p>
+
+      <!-- ===== 2026 ===== -->
+      <h3 class="pub-year-heading">2026</h3>
+      <ol class="pub-list">
+
+        <!-- Paper: Context-Aware Generative Imputation -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/cepa_example.png" alt="CEPA comparison with and without cross-modal information on chest X-rays" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Context-Aware Generative Imputation for Robust Multimodal Learning in Missing Modality Scenarios</div>
+            <div class="pub-authors">
+              <span class="me">Jungwon Choi</span>, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2026 (to appear)</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: PROVISION-AF -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/npj_method.png" alt="PROVISION-AF method: self-supervised ECG reconstruction followed by atrial fibrillation classification" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Impact of an AI algorithm for multi-day prediction of incident atrial fibrillation on clinical decision-making: PROVISION-AF study</div>
+            <div class="pub-authors">
+              Yeji Kim, Bogeun Kim, Jaeung Yoon, Jeongmin Kang, Seung Woo Lee, Moon-Hyun Kim, Dong-Hyeok Kim, Hye Ah Lee, Jaemin Shim, Dae-In Lee, Seung-Young Roh, Seung Young Shin, Sung Hwa Choi, Yae Min Park, Ki Hong Lee, Yoo Ri Kim, Min Kim, Wei-Jin Park, Hyeon Yeo, <span class="me">Jungwon Choi</span>, Tae Young Shin, Junbeom Park
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">npj Digital Medicine, 2026</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://www.nature.com/articles/s41746-026-02950-6" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: Rhinovirus Syndromic Surveillance -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/forecasting.png" alt="Rhinovirus patient counts: ground truth and predictions from symptom search trends" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Can Symptom Search Trends Forecast Respiratory Virus Patient Counts? A Rhinovirus Case Study in Korean Syndromic Surveillance</div>
+            <p class="pub-summary">Exploring symptom search trends as signals for forecasting respiratory virus patient counts.</p>
+            <div class="pub-authors">
+              <span class="me equal">Jungwon Choi</span><sup>*</sup>, Hyun Do Jung<sup>*</sup>, Soyeoun Kim
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICML 2026 Workshop on Structured Data for Health (SD4H)</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=1VpRNBkUrn" target="_blank" rel="noopener">OpenReview</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: ForestPersons -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/Forestpersons.png" alt="ForestPersons" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">ForestPersons: A Large-Scale Dataset for Under-Canopy Missing Person Detection</div>
+            <div class="pub-authors">
+              Deokyun Kim<sup>*</sup>, Jeongjun Lee<sup>*</sup>, <span class="me equal">Jungwon Choi</span><sup>*</sup>, Jonggeon Park<sup>*</sup>, Giyoung Lee, Yookyung Kim, Myungseok Ki, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>, Jihun Cha
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICLR 2026</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=ZC2N9q8USm" target="_blank" rel="noopener">OpenReview</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: fMRI SOC -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/BDO.png" alt="fMRI SOC" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Stochastic Optimal Control for Continuous-Time fMRI Representation Learning</div>
+            <div class="pub-authors">
+              Joonhyeong Park<sup>*</sup>, <a href="https://bw-park.github.io/" target="_blank" rel="noopener">Byoungwoo Park</a><sup>*</sup>, Chang-Bae Bang, <span class="me">Jungwon Choi</span>, Hyungjin Chung, <a href="https://egyptdj.github.io/cv/" target="_blank" rel="noopener">Byung-Hoon Kim</a>, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICLR 2026</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=N51nP3TBwR" target="_blank" rel="noopener">OpenReview</a>
+              <a href="https://arxiv.org/abs/2502.04892" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: Preventing Representation Collapse (ICLR 2026 Re-Align Workshop) -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/CEPA.png" alt="CEPA: Context-Conditional Alignment" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Preventing Representation Collapse in Latent Prediction via Context-Conditional Alignment under Missing Modalities</div>
+            <div class="pub-authors">
+              <span class="me">Jungwon Choi</span>, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICLR 2026 Workshop on Representational Alignment (Re-Align)</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=4GsUiCZNhf" target="_blank" rel="noopener">OpenReview</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: Bridging the Missing-Modality Gap (ICLR 2026 Trustworthy AI Workshop) -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/LIM.png" alt="Bridging the Missing-Modality Gap" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Bridging the Missing-Modality Gap: Improving Text-Only Calibration of Vision Language Models</div>
+            <div class="pub-authors">
+              Mingyeong Kim, <span class="me">Jungwon Choi</span>, Chaeyun Jang, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICLR 2026 Workshop on Principled Design for Trustworthy AI</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=ATL8VtvYWd" target="_blank" rel="noopener">OpenReview</a>
+              <a href="https://arxiv.org/abs/2605.12517" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper: ReaMIL (WACV 2026 LFMBio Workshop, Oral) -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/ReaMIL.jpeg" alt="ReaMIL overview" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">ReaMIL: Reasoning- and Evidence-Aware Multiple Instance Learning for Whole-Slide Histopathology</div>
+            <div class="pub-authors">
+              Hyundo Jung, <span class="me">Jungwon Choi</span>, Hwiyoung Kim
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">WACV 2026 Workshop on Large Foundation Models in Biology and Biomedicine (LFMBio)</span>
+              <span class="pub-oral"><span aria-hidden="true">★</span> Oral Presentation</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openaccess.thecvf.com/content/WACV2026W/LFMBio/html/Do_Jung_ReaMIL_Reasoning-_and_Evidence-Aware_Multiple_Instance_Learning_for_Whole-Slide_Histopathology_WACVW_2026_paper.html" target="_blank" rel="noopener">Paper</a>
+              <a href="https://arxiv.org/abs/2601.10073" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <!-- ===== 2024 ===== -->
+      <h3 class="pub-year-heading">2024</h3>
+      <ol class="pub-list">
+
+        <!-- Paper 1: DBFS -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/catwild128x128.gif" alt="DBFS diffusion bridge" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Stochastic Optimal Control for Diffusion Bridges in Function Spaces</div>
+            <div class="pub-authors">
+              <a href="https://bw-park.github.io/" target="_blank" rel="noopener">Byoungwoo Park</a>, <span class="me">Jungwon Choi</span>, Sungbin Lim, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2024</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2405.20630" target="_blank" rel="noopener">arXiv</a>
+              <a href="https://github.com/bw-park/DBFS" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper 2: STJEMA -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/STJEMA_overview.png" alt="STJEMA overview" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Joint-Embedding Masked Autoencoder for Self-supervised Learning of Dynamic Functional Connectivity from the Human Brain</div>
+            <div class="pub-authors">
+              <span class="me">Jungwon Choi</span>, <a href="https://hyungi-lee.github.io/" target="_blank" rel="noopener">Hyungi Lee</a>, <a href="https://egyptdj.github.io/cv/" target="_blank" rel="noopener">Byung-Hoon Kim</a>, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">Preprint</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2403.06432" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper 3: TENET ISBI -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/TENET_Overview.png" alt="TENET overview" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Learning Dynamic Brain Connectome with Graph Transformers for Psychiatric Diagnosis Classification</div>
+            <div class="pub-authors">
+              <a href="https://egyptdj.github.io/cv/" target="_blank" rel="noopener">Byung-Hoon Kim</a><sup>*</sup>, <span class="me equal">Jungwon Choi</span><sup>*</sup>, <a href="https://yuneg11.github.io/about/" target="_blank" rel="noopener">EungGu Yun</a>, Kyungsang Kim, Xiang Li, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">ISBI 2024</span>
+              <span class="pub-oral"><span aria-hidden="true">★</span> Oral Presentation</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://ieeexplore.ieee.org/document/10635508" target="_blank" rel="noopener">IEEE</a>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <!-- ===== 2023 ===== -->
+      <h3 class="pub-year-heading">2023</h3>
+      <ol class="pub-list">
+
+        <!-- Paper 4: STMAE -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/STMAE_Overview_revised.png" alt="STMAE overview" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">A Generative Self-Supervised Framework using Functional Connectivity in fMRI Data</div>
+            <div class="pub-authors">
+              <span class="me">Jungwon Choi</span>, Seongho Keum, <a href="https://yuneg11.github.io/about/" target="_blank" rel="noopener">EungGu Yun</a>, <a href="https://egyptdj.github.io/cv/" target="_blank" rel="noopener">Byung-Hoon Kim</a>, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2023 TGL Workshop</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=JXranzV2zV" target="_blank" rel="noopener">Paper</a>
+              <a href="https://arxiv.org/abs/2312.01994" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper 5: TENET NeurIPS-W -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/TENET_embedding.png" alt="TENET embedding" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Large-scale Graph Representation Learning of Dynamic Brain Connectome with Transformers</div>
+            <div class="pub-authors">
+              <a href="https://egyptdj.github.io/cv/" target="_blank" rel="noopener">Byung-Hoon Kim</a><sup>*</sup>, <span class="me equal">Jungwon Choi</span><sup>*</sup>, <a href="https://yuneg11.github.io/about/" target="_blank" rel="noopener">EungGu Yun</a>, Kyungsang Kim, Xiang Li, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2023 TGL Workshop</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=WvFHDkIhmp" target="_blank" rel="noopener">Paper</a>
+              <a href="https://arxiv.org/abs/2312.14939" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paper 6: Uplift AAAI Bridge -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/backend-ts.png" alt="Uplift modeling" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Modeling Uplift from Observational Time-Series in Continual Scenarios</div>
+            <div class="pub-authors">
+              <a href="https://github.com/nannullna" target="_blank" rel="noopener">Sanghyun Kim</a>, <span class="me">Jungwon Choi</span>, NamHee Kim, Jaesung Ryu, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">AAAI 2023 Bridge Program</span>
+              <span class="pub-oral"><span aria-hidden="true">★</span> Oral Presentation</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://proceedings.mlr.press/v208/kim23a.html" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/nannullna/ts4uplift" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <!-- ===== 2022 ===== -->
+      <h3 class="pub-year-heading">2022</h3>
+      <ol class="pub-list">
+
+        <!-- Paper 7: BPC NeurIPS -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/BPC.png" alt="BPC divergences" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">On Divergence Measures for Bayesian Pseudocoresets</div>
+            <div class="pub-authors">
+              Balhae Kim, <span class="me">Jungwon Choi</span>, <a href="https://seanie12.github.io/" target="_blank" rel="noopener">Seanie Lee</a>, Yoonho Lee, Jung-Woo Ha, <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2022</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://openreview.net/forum?id=bg7d_2jWv6" target="_blank" rel="noopener">Paper</a>
+              <a href="https://arxiv.org/abs/2210.06205" target="_blank" rel="noopener">arXiv</a>
+              <a href="https://github.com/balhaekim/bpc-divergences" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <!-- ===== 2021 ===== -->
+      <h3 class="pub-year-heading">2021</h3>
+      <ol class="pub-list">
+
+        <!-- Paper 8: MS Thesis -->
+        <li class="pub-item">
+          <div class="pub-thumb-col">
+            <img class="pub-thumb" src="./assets/MS_Thesis.png" alt="MS thesis" loading="lazy">
+          </div>
+          <div class="pub-info">
+            <div class="pub-title">Robust Deepfake Detection via Invariant Feature Learning</div>
+            <div class="pub-authors">
+              <span class="me">Jungwon Choi</span>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-venue">Master Thesis, KAIST, 2021</span>
+            </div>
+            <div class="pub-links">
+              <a href="https://koasas.kaist.ac.kr/handle/10203/295929" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+
+
+    </section>
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         HONORS & AWARDS
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="honors">
+      <h2 class="section-title">Honors &amp; Awards</h2>
+
+      <ul class="honor-list">
+        <li>
+          <span class="honor-icon"><i class="fa-solid fa-trophy"></i></span>
+          <div class="honor-content">
+            <span class="honor-title">Excellence Award &ndash; First Place, Seoul AI Hub (AI+Healthcare)</span>
+            <div class="honor-detail">Syndromic surveillance of respiratory viruses using symptom search data.</div>
+          </div>
+          <span class="honor-date">Dec 2024</span>
+        </li>
+        <li>
+          <span class="honor-icon"><i class="fa-solid fa-award"></i></span>
+          <div class="honor-content">
+            <span class="honor-title">Excellence Award, SKT AI Fellowship</span>
+            <div class="honor-detail">Detection of GAN-generated images in collaboration with SK Telecom.</div>
+          </div>
+          <span class="honor-date">Nov 2021</span>
+        </li>
+        <li>
+          <span class="honor-icon"><i class="fa-solid fa-medal"></i></span>
+          <div class="honor-content">
+            <span class="honor-title">Dean's List with Merit-based Scholarship, Inha University</span>
+            <div class="honor-detail">Merit-based scholarships every semester; ranked 2nd in the department.</div>
+          </div>
+          <span class="honor-date">Mar 2013 &ndash; Feb 2019</span>
+        </li>
+        <li>
+          <span class="honor-icon"><i class="fa-solid fa-award"></i></span>
+          <div class="honor-content">
+            <span class="honor-title">Excellence Award, 5th Software Convergence Hackathon of Republic of Korea</span>
+            <div class="honor-detail">AI-based service prototype; award granted by the Governor of Jeollanam-do.</div>
+          </div>
+          <span class="honor-date">Sep 2018</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         ACADEMIC SERVICES
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="services">
+      <h2 class="section-title">Academic Services</h2>
+
+      <div class="service-group">
+        <div class="service-group-title">Journal Reviewer</div>
+        <ul class="service-list">
+          <li><span class="service-venue">Machine Learning (Springer Nature)</span></li>
+          <li><span class="service-venue">IEEE Transactions on Medical Imaging</span></li>
+          <li><span class="service-venue">Medical Image Analysis</span></li>
+          <li><span class="service-venue">IEEE Open Journal of the Computer Society</span></li>
+        </ul>
+      </div>
+
+      <div class="service-group">
+        <div class="service-group-title">Conference Reviewer</div>
+        <ul class="service-list conference-list">
+          <li><span class="service-venue">ICLR</span><span class="service-years">2025&ndash;2027</span></li>
+          <li><span class="service-venue">AAAI</span><span class="service-years">2027</span></li>
+          <li><span class="service-venue">ICML</span><span class="service-years">2025&ndash;2026</span></li>
+          <li><span class="service-venue">NeurIPS</span><span class="service-years">2026</span></li>
+          <li><span class="service-venue">ECCV</span><span class="service-years">2026</span></li>
+        </ul>
+        <ul class="service-list conference-list-mobile">
+          <li><span class="service-venue">ICLR</span><span class="service-years">2025&ndash;2027</span></li>
+          <li><span class="service-venue">AAAI</span><span class="service-years">2027</span></li>
+          <li><span class="service-venue">ICML</span><span class="service-years">2025&ndash;2026</span></li>
+          <li><span class="service-venue">NeurIPS · ECCV</span><span class="service-years">2026</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ––––––––––––––––––––––––––––––––––––––––––––––
+         EDUCATION
+         –––––––––––––––––––––––––––––––––––––––––––––– -->
+    <section id="education">
+      <h2 class="section-title">Education</h2>
+
+      <ul class="education-list">
+        <li>
+          <span class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          <div class="edu-content">
+            <span class="edu-school">KAIST AI</span>
+            <div class="edu-detail">PhD in Artificial Intelligence &middot; Advisor: <a href="https://juho-lee.github.io/" target="_blank" rel="noopener">Juho Lee</a></div>
+          </div>
+          <span class="edu-date">Mar 2021 &ndash; Present</span>
+        </li>
+        <li>
+          <span class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          <div class="edu-content">
+            <span class="edu-school">KAIST EE</span>
+            <div class="edu-detail">MS in Electrical Engineering &middot; Advisor: <a href="https://scholar.google.com/citations?user=nd-UgBYAAAAJ&amp;hl=ko" target="_blank" rel="noopener">Dae-Shik Kim</a></div>
+          </div>
+          <span class="edu-date">Mar 2019 &ndash; Feb 2021</span>
+        </li>
+        <li>
+          <span class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          <div class="edu-content">
+            <span class="edu-school">INHA University</span>
+            <div class="edu-detail">BS in Electronic Engineering &middot; <em>Summa Cum Laude</em> (4.33/4.5) &middot; Advisor: <a href="https://dsp.inha.ac.kr/bowonlee/" target="_blank" rel="noopener">Bowon Lee</a></div>
+          </div>
+          <span class="edu-date">Mar 2013 &ndash; Feb 2019</span>
+        </li>
+        <li>
+          <span class="edu-icon"><i class="fa-solid fa-plane-departure"></i></span>
+          <div class="edu-content">
+            <span class="edu-school">University of California, Riverside</span>
+            <div class="edu-detail">Overseas Regional Studies Program</div>
+          </div>
+          <span class="edu-date">Jan 2017</span>
+        </li>
+      </ul>
+    </section>
+
+  </div><!-- /.main-content -->
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <p>Jungwon Choi &middot; KAIST AI &middot; Statistical Inference and Machine Learning Lab</p>
+    <p>&copy; 2026 Jungwon Choi. Design inspired by al-folio.</p>
+  </footer>
+
+  <!-- Bootstrap 5 JS (minimal, for potential responsive nav) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Progress bar + smooth scroll highlight -->
+  <script>
+    // Dark/Light theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const icon = toggle.querySelector('i');
+      const KEY = 'jc-theme';
+
+      function setTheme(t) {
+        if (t === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          icon.classList.replace('fa-sun', 'fa-moon');
+        }
+        localStorage.setItem(KEY, t);
+      }
+
+      var saved = localStorage.getItem(KEY);
+      if (saved) {
+        setTheme(saved);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      }
+
+      toggle.addEventListener('click', function () {
+        var isDark = document.documentElement.hasAttribute('data-theme');
+        setTheme(isDark ? 'light' : 'dark');
+      });
+    })();
+
+    // Progress bar
+    (function () {
+      const bar = document.getElementById('progressBar');
+      window.addEventListener('scroll', function () {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      });
+    })();
+
+    // Active nav link highlight on scroll
+    (function () {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      function setActive() {
+        let current = '';
+        const offset = 120;
+        sections.forEach(function (section) {
+          const top = section.offsetTop - offset;
+          if (window.scrollY >= top) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(function (link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', setActive);
+      setActive();
+    })();
+  </script>
+
+</body>
+</html>
